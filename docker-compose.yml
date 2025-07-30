@@ -1,0 +1,49 @@
+
+
+services:
+  node1:
+    image: docker-compose-ssh:1
+    hostname: node1
+    container_name: node1
+    entrypoint: ["/bin/entrypoint.sh", "${USERNAME}", "node2,node3"]
+    volumes:
+      - shared_ssh_keys:/ssh-keys
+      - shared_data:/mnt/shared
+    networks:
+      cluster_net:
+        ipv4_address: 172.20.0.11
+
+  node2:
+    image: docker-compose-ssh:1
+    hostname: node2
+    container_name: node2
+    entrypoint: ["/bin/entrypoint.sh", "${USERNAME}", "node1,node3"]
+    volumes:
+      - shared_ssh_keys:/ssh-keys
+      - shared_data:/mnt/shared
+    networks:
+      cluster_net:
+        ipv4_address: 172.20.0.12
+
+  node3:
+    image: docker-compose-ssh:1
+    hostname: node3
+    container_name: node3
+    entrypoint: ["/bin/entrypoint.sh", "${USERNAME}", "node1,node2"]
+    volumes:
+      - shared_ssh_keys:/ssh-keys
+      - shared_data:/mnt/shared
+    networks:
+      cluster_net:
+        ipv4_address: 172.20.0.13
+
+volumes:
+  shared_ssh_keys:
+  shared_data:
+
+networks:
+  cluster_net:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/24
