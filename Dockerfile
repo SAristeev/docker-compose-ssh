@@ -3,8 +3,7 @@ FROM debian:12.10-slim
 RUN apt-get update && \
     apt-get install -y \
     openssh-server \
-    openssh-client \
-    mpich
+    openssh-client
 
 RUN mkdir -p /var/run/sshd && \
     echo "PermitRootLogin yes" >> /etc/ssh/sshd_config && \
