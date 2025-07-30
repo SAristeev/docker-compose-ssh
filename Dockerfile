@@ -4,10 +4,10 @@ RUN apt-get update && \
     apt-get install -y \
     openssh-server \
     openssh-client \
-    gosu
+    mpich
 
 RUN mkdir -p /var/run/sshd && \
-    echo "PermitRootLogin no" >> /etc/ssh/sshd_config && \
+    echo "PermitRootLogin yes" >> /etc/ssh/sshd_config && \
     echo "PubkeyAuthentication yes" >> /etc/ssh/ssh_config && \
     echo "PasswordAuthentication no" >> /etc/ssh/ssh_config && \
     echo "KbdInteractiveAuthentication no" >> /etc/ssh/ssh_config

@@ -5,7 +5,7 @@ services:
     image: docker-compose-ssh:1
     hostname: node1
     container_name: node1
-    entrypoint: ["/bin/entrypoint.sh", "${USERNAME}", "node2,node3"]
+    entrypoint: ["/bin/entrypoint.sh", "node2,node3"]
     volumes:
       - shared_ssh_keys:/ssh-keys
       - shared_data:/mnt/shared
@@ -17,7 +17,7 @@ services:
     image: docker-compose-ssh:1
     hostname: node2
     container_name: node2
-    entrypoint: ["/bin/entrypoint.sh", "${USERNAME}", "node1,node3"]
+    entrypoint: ["/bin/entrypoint.sh", "node1,node3"]
     volumes:
       - shared_ssh_keys:/ssh-keys
       - shared_data:/mnt/shared
@@ -29,7 +29,7 @@ services:
     image: docker-compose-ssh:1
     hostname: node3
     container_name: node3
-    entrypoint: ["/bin/entrypoint.sh", "${USERNAME}", "node1,node2"]
+    entrypoint: ["/bin/entrypoint.sh", "node1,node2"]
     volumes:
       - shared_ssh_keys:/ssh-keys
       - shared_data:/mnt/shared
