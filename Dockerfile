@@ -1,9 +1,10 @@
-FROM debian:12.10-slim
+FROM centos:7
+RUN sed -i 's/mirrorlist/#mirrorlist/g' /etc/yum.repos.d/CentOS-*
+RUN sed -i 's|#baseurl=http://mirror.centos.org|baseurl=http://vault.centos.org|g' /etc/yum.repos.d/CentOS-*
 
-RUN apt-get update && \
-    apt-get install -y \
+RUN yum install -y \
     openssh-server \
-    openssh-client
+    openssh-clients 
 
 RUN mkdir -p /var/run/sshd && \
     echo "PermitRootLogin yes" >> /etc/ssh/sshd_config && \

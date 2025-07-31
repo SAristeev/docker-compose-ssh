@@ -9,6 +9,7 @@ echo SIBLINGS: $SIBLINGS
 
 ##############
 # SSH setup
+ssh-keygen -A
 mkdir -p /root/.ssh
 
 # Create public key and copy to volume
